@@ -20,7 +20,7 @@ public class Demo {
     private static final Events event2 = new Events("e2");
 
     private static Map<String, List<Long>> getEvents(Table table, String userId) throws IOException {
-        long currentTs= System.currentTimeMillis() / 1000L;
+        long currentTs= System.currentTimeMillis();
 
         Get get = new Get(Bytes.toBytes(userId));
         get = get.setMaxVersions().setTimeRange(currentTs-1L*24*3600, currentTs); //1day history
@@ -66,7 +66,7 @@ public class Demo {
             printEvents(eventsTable, "user1");
             printEvents(eventsTable, "user2");
 
-            Long currentTs = System.currentTimeMillis() / 1000L;
+            Long currentTs = System.currentTimeMillis();
             event1.addEvent(eventsTable, "user1", currentTs);
             event1.addEvent(eventsTable, "user2", currentTs-1800L);
             event2.addEvent(eventsTable, "user1", currentTs-3600L);
